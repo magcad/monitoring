@@ -14,11 +14,11 @@ chown -R 472:472 ${PROMETHEUS_ROOT}/data/grafana #grafana userid
 
 configs=( "grafana.ini" "prometheus.yml" )
 for i in "${configs[@]}"; do
-  curl -fsSL https://magman.synology.me/cado/cado_web/-/raw/Develop/Monitoring/Setup/${i} -o ${PROMETHEUS_ROOT}/configs/${i}
+  curl -fsSL https://raw.githubusercontent.com/magcad/monitoring/main/setup/${i} -o ${PROMETHEUS_ROOT}/configs/${i}
   echo "config created ${PROMETHEUS_ROOT}/configs/${i}"
 done
 
-curl -fsSL https://magman.synology.me/cado/cado_web/-/raw/Develop/Monitoring/Setup/docker-compose.yml \
+curl -fsSL https://raw.githubusercontent.com/magcad/monitoring/main/setup/docker-compose.yml \
 | sed "s/\${PROMETHEUS_ROOT}/${PROMETHEUS_ROOT//\//\\/}/g" > ${PROMETHEUS_ROOT}/docker-compose.yml
 echo "docker-compose file created ${PROMETHEUS_ROOT}/docker-compose.yml"
 
